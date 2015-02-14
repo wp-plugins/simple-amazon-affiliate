@@ -30,7 +30,7 @@ function dump( $var ){
 }
 
 function get_user_by_meta( $key, $val ) {
-    return get_users( [ 'meta_key' => $key, 'meta_value' => $val ] );
+    return get_users( array( 'meta_key' => $key, 'meta_value' => $val ) );
 }
 
 /**
@@ -61,7 +61,7 @@ function curPageURL( $queryPram = true ) {
  * @return object       List of all users
  */
 function get_user_list() {
-    $users = get_users( [ 'fields' => [ 'ID', 'display_name' ] ] );
+    $users = get_users( array( 'fields' => array( 'ID', 'display_name' ) ) );
     return $users;
 }
 

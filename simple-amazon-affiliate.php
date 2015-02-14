@@ -3,7 +3,7 @@
   Plugin Name: Simple Amazon Affiliate
   Plugin URI: http://duogeek.com
   Description: A Simple and Revenue Generating Amazon Product Affiliate plugin from DuoGeek
-  Version: 1.0
+  Version: 1.0.1
   Author: DuoGeek
   Author URI: http://duogeek.com
   License: GPL v2 or later

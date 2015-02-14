@@ -179,7 +179,7 @@ if( ! class_exists( 'customPostType' ) ) {
 			return $html;
 		}
 
-		public function get_tax_list( $taxonomies, $args = [] ){
+		public function get_tax_list( $taxonomies, $args = array() ){
 			$defaults = array(
 				'orderby'           => 'name',
 				'order'             => 'ASC',
