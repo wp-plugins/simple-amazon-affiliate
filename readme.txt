@@ -1,7 +1,7 @@
-=== Simple Amazon Affiliate ===
+=== Plugin Name ===
 Contributors: duogeek
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VZB6MW3L4F526
-Tags: faq, faqs, frequently asked questions, wordpress faq, faq wordpress, faq for wordpress, faq plugin
+Tags: affiliate, amazon, amazon affiliate, affiliate marketing, amazon marketing
 Requires at least: 3.5
 Tested up to: 4.1
 Stable tag: 1.0
