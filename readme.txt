@@ -71,6 +71,9 @@ You just need to signup in Amazon to get your keys and affiliate id and put thos
 
 
 == Changelog ==
+= 1.0.3 =
+* Minor Update
+
 = 1.0.2 =
 * js error fixed in admin
 
