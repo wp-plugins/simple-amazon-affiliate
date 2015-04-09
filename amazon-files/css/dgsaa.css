@@ -1,0 +1,33 @@
+.saa-amazon-wrapper {
+	
+}
+
+.saa-amazon-item {
+    float: left;
+    width: 20%;
+}
+
+.saa-amazon-title {
+    padding: 5px;
+    height: 80px;
+    line-height: 1.2;
+}
+
+.saa-amazon-title a {
+	font-size: 12px;
+	border-bottom: none !important;
+}
+
+.saa-amazon-title a:hover {
+	text-decoration: none;
+}
+.saa-amazon-image {
+}
+
+.saa-amazon-item img {
+    border: 2px solid #dddddd;
+    box-shadow: none !important;
+    margin: 10px 0px;
+    height: 150px;
+    width: 90%;
+}
