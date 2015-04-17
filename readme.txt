@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: faq, faqs, frequently asked questions, wordpress faq, faq wordpress, faq for wordpress, faq plugin
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,10 @@ You just need to signup in Amazon to get your keys and affiliate id and put thos
 
 
 == Changelog ==
+= 1.0.7 =
+* Minor update
+* Improved: Performance
+
 = 1.0.4 =
 = 1.0.3 =
 * Minor Update

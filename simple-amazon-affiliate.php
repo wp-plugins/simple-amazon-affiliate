@@ -3,7 +3,7 @@
   Plugin Name: Simple Amazon Affiliate
   Plugin URI: http://duogeek.com
   Description: A Simple and Revenue Generating Amazon Product Affiliate plugin from DuoGeek
-  Version: 1.0.6
+  Version: 1.0.7
   Author: DuoGeek
   Author URI: http://duogeek.com
   License: GPL v2 or later
@@ -48,6 +48,20 @@ if ( !class_exists( 'DuoAmazonAffiliate' ) ) {
             add_action( 'admin_notices', array($this, 'saa_admin_notice') );
             add_filter( 'duogeek_submenu_pages', array( $this, 'saa_menu' ) );
             add_filter( 'duo_panel_help', array( $this, 'saa_help_cb' ) );
+            register_activation_hook( __FILE__, array( $this, 'saa_plugin_activate' ) );
+            add_action( 'admin_init', array( $this, 'saa_plugin_redirect' ) );
+        }
+
+        public function saa_plugin_activate() {
+            update_option( 'saa_plugin_do_activation_redirect', true );
+        }
+
+
+        public function saa_plugin_redirect() {
+            if ( get_option( 'saa_plugin_do_activation_redirect', false ) ) {
+                delete_option( 'saa_plugin_do_activation_redirect' );
+                wp_redirect( admin_url( DUO_SETTINGS_PAGE ) );
+            }
         }
 
         public function saa_help_cb( $arr ){
@@ -250,53 +264,52 @@ if ( !class_exists( 'DuoAmazonAffiliate' ) ) {
 
             $options = get_option( 'saa_options', true );
             ?>
-            <div class="wrap">
+            <div class="wrap duo_prod_panel">
                 <h2><?php echo SAA_BRAND ?></h2>
-            <?php if ( isset( $_REQUEST['msg'] ) && $_REQUEST['msg'] != '' ) { ?>
-                    <div class="<?php echo isset( $_REQUEST['res'] ) ? $_REQUEST['res'] : 'updated' ?>">
-                        <p>
-                <?php echo str_replace( '+', ' ', $_REQUEST['msg'] ); ?>
-                        </p>
-                    </div>
-            <?php } ?>
+                <?php if ( isset( $_REQUEST['msg'] ) && $_REQUEST['msg'] != '' ) { ?>
+                        <div class="<?php echo isset( $_REQUEST['res'] ) ? $_REQUEST['res'] : 'updated' ?>">
+                            <p>
+                    <?php echo str_replace( '+', ' ', $_REQUEST['msg'] ); ?>
+                            </p>
+                        </div>
+                <?php } ?>
                 <div id="poststuff">
-                    <div class="postbox">
-                        <h3 class="hndle">Instruction</h3>
-                        <div class="inside">
-                            <p>For any issues, problem or query, please feel free to <a href="http://duogeek.com/contact/" target="_blank">contact us</a>.</p>
+                    <div id="post-body" class="metabox-holder columns-2">
+                        <div id="post-body-content">
+                            <div class="postbox">
+                                <h3 class="hndle">Save your Access Key, Secret Key & Assoc Tag</h3>
+                                <div class="inside">
+                                    <form action="<?php echo admin_url( 'admin.php?page=saa-affiliate&noheader=true' ) ?>" method="post">
+                    <?php wp_nonce_field( 'saa_nonce', 'saa_nonce_val' ); ?>
+                                        <table cellpadding="5" cellspacing="5">
+                                            <tr>
+                                                <th>Access Key</th>
+                                                <td>
+                                                    <input type="text" name="options[accesskey]" value="<?php echo isset( $options['options']['accesskey'] ) && $options['options']['accesskey'] != '' ? $options['options']['accesskey'] : '' ?>">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Secret Key</th>
+                                                <td>
+                                                    <input type="text" name="options[secretkey]" value="<?php echo isset( $options['options']['secretkey'] ) && $options['options']['secretkey'] != '' ? $options['options']['secretkey'] : '' ?>">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Assoc Tag</th>
+                                                <td>
+                                                    <input type="text" name="options[assoctag]" value="<?php echo isset( $options['options']['assoctag'] ) && $options['options']['assoctag'] != '' ? $options['options']['assoctag'] : '' ?>">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <p><input type="submit" class="button button-primary" name="option_save" value="Save" style="width: 100px; text-align: center;"></p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="postbox-container" id="postbox-container-1">
+                            <?php do_action( 'dg_settings_sidebar', 'free', 'saa-free' ); ?>
                         </div>
                     </div>
-
-                    <div class="postbox">
-                        <h3 class="hndle">Save your Access Key, Secret Key & Assoc Tag</h3>
-                        <div class="inside">
-                            <form action="<?php echo admin_url( 'admin.php?page=saa-affiliate&noheader=true' ) ?>" method="post">
-            <?php wp_nonce_field( 'saa_nonce', 'saa_nonce_val' ); ?>
-                                <table cellpadding="5" cellspacing="5">
-                                    <tr>
-                                        <th>Access Key</th>
-                                        <td>
-                                            <input type="text" name="options[accesskey]" value="<?php echo isset( $options['options']['accesskey'] ) && $options['options']['accesskey'] != '' ? $options['options']['accesskey'] : '' ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Secret Key</th>
-                                        <td>
-                                            <input type="text" name="options[secretkey]" value="<?php echo isset( $options['options']['secretkey'] ) && $options['options']['secretkey'] != '' ? $options['options']['secretkey'] : '' ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Assoc Tag</th>
-                                        <td>
-                                            <input type="text" name="options[assoctag]" value="<?php echo isset( $options['options']['assoctag'] ) && $options['options']['assoctag'] != '' ? $options['options']['assoctag'] : '' ?>">
-                                        </td>
-                                    </tr>
-                                </table>
-                                <p><input type="submit" class="button button-primary" name="option_save" value="Save" style="width: 100px; text-align: center;"></p>
-                            </form>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <?php
